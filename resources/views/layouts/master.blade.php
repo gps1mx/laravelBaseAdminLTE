@@ -140,6 +140,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             class="fas fa-th-large"></i></a>
       </li>
     </ul>
+    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+      Salir
+      </a>
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+  </form>
   </nav>
   <!-- /.navbar -->
 
