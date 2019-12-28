@@ -23,6 +23,10 @@ Route::group(['middleware' => 'auth'], function () {
         return view('layouts.master');
     });
     
+    Route::get('/home', 'HomeController@index')->name('/');
     Route::get('/home', 'HomeController@index')->name('home');
+
+    
+
 });
 
