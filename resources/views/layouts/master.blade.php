@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>App</title>
+  <title>Dev App</title>
 
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
@@ -197,6 +197,8 @@
       <!-- /.sidebar -->
     </aside>
 
+
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -204,7 +206,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Starter Page</h1>
+              <h1 class="m-0 text-dark">@yield('title')</h1>
             </div><!-- /.col -->
             
           </div><!-- /.row -->
@@ -215,12 +217,14 @@
       <!-- Main content -->
       <div class="content">
         <div class="container-fluid">
-
+          @include('flash::message') @yield('content')
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
+
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -237,7 +241,7 @@
       <!-- To the right -->
 
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2019 All rights reserved.
+      <strong>Copyright &copy; Todos los derechos reservados.
     </footer>
   </div>
   <!-- ./wrapper -->

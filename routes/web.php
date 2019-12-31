@@ -24,8 +24,17 @@ Route::group(['middleware' => 'auth'], function () {
         return view('layouts.master');
     });
     
+    /**
+     * Ruta principal de sección
+     */
+    Route::get('blank', function () {
+        return view('blank');
+    });
+
     Route::get('/home', 'HomeController@index')->name('/');
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('dashboard', 'DashboardController@dashboard')->name('dashboard');
+    Route::get('/', 'DashboardController@dashboard')->name('/');
 
 });
 
