@@ -141,11 +141,17 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="{{ route('users.index') }}" class="nav-link
-                  @if($subseccion == 'users')
+                  @if(($seccion == 'administracion')&&($subseccion == 'users'))
                   active 
                   @endif
                   ">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="far 
+                    @if(($seccion == 'administracion')&&($subseccion == 'users'))
+                    active fa-check-circle 
+                    @else
+                    fa-circle
+                    @endif
+                    nav-icon"></i>
                     <p>Usuarios</p>
                   </a>
                 </li>
