@@ -14,7 +14,8 @@
 	<!-- Bootstrap (4) -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- Font Awesome Icons -->
-	<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+	<link rel="stylesheet" href="css/all.min.css">
+	<link rel="stylesheet" href="css/fontawesome.min.css">
 	<!-- Theme style -->
 	<link rel="stylesheet" href="dist/css/adminlte.min.css">
 	<!-- Google Font: Source Sans Pro -->
@@ -108,7 +109,7 @@
 				active 
 				@endif
 				">
-				<i class="fas fa-home nav-icon"></i>
+				<i class="nav-icon fas fa-tachometer-alt"></i>
 				<p>Dashboard</p>
 				</a>
 			</li>
@@ -120,7 +121,8 @@
 			active 
 			@endif
 			">
-				<i class="nav-icon fas fa-tachometer-alt"></i>
+				<i class="nav-icon fa fa-line-chart"></i>
+				<i class="fa fa-line-chart" aria-hidden="true"></i>
 				<p>
 				Administración
 				<i class="right fas fa-angle-left"></i>
@@ -184,7 +186,7 @@
 			@endif">
 				<i class="nav-icon fas fa-tachometer-alt"></i>
 				<p>
-				Pages
+				Pages 1
 				<i class="right fas fa-angle-left"></i>
 				</p>
 			</a>
@@ -325,6 +327,8 @@
 	<script src="plugins/jquery/jquery.min.js"></script>
 	<!-- Bootstrap 4 -->
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<!-- Fontawesome -->
+	<script src="js/all.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="dist/js/adminlte.min.js"></script>
 	<!-- AdminLTE for demo purposes -->
