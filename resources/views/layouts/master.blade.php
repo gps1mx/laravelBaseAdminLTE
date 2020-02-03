@@ -2,23 +2,23 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Dev App</title>
-  @if(!strlen($seccion))
-    $seccion = "dashboard";
-  @endif
+	<title>Dev App</title>
+	@if(!strlen($seccion))
+		$seccion = "dashboard";
+	@endif
 
-  <!-- Bootstrap (4) -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+	<!-- Bootstrap (4) -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Font Awesome Icons -->
+	<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="dist/css/adminlte.min.css">
+	<!-- Google Font: Source Sans Pro -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse skin-yellow accent-dark">
@@ -267,79 +267,36 @@
     </aside>
 
 
+  	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<section class="content-header">
+		{{-- <div class="container-fluid">
+			<div class="row mb-2">
+			</div> 
+		</div> --}}
+		</section>
 
-    <!-- Content Wrapper. Contains page content -->
+		<section class="content">
 
-      <!-- Main content -->
-      {{-- <div class="content">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="box box-primary">
-                <div class="box-header with-border">
-                  @include('flash::message') @yield('content')
-                </div>
-              </div>
-            </div>
-          </div>
-      </div> --}}
-	  <!-- /.content -->
-	  
+		<div class="card">
+			<div class="card-header">
+			<h3 class="card-title"><h3>@yield('title')</h3></h3>
 
-	  
+			<div class="card-tools">
+				{{-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+				<i class="fas fa-minus"></i></button>--}}
+				{{-- <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+				<i class="fas fa-times"></i></button>  --}}
+			</div>
+			</div>
+			<div class="card-body">
+				@include('flash::message') @yield('content')
+			</div>
+		</div>
 
-
-
-	  <!-- =============================================== -->
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          {{-- <div class="col-sm-6">
-            <h1>Blank Page 1</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Blank Page</li>
-            </ol>
-		  </div> --}}
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title"><h3>@yield('title')</h3></h3>
-
-          <div class="card-tools">
-            {{-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button> --}}
-          </div>
-        </div>
-        <div class="card-body">
-			@include('flash::message') @yield('content')
-        </div>
-        <!-- /.card-body -->
-        {{-- <div class="card-footer">
-          Footer
-        </div> --}}
-        <!-- /.card-footer-->
-      </div>
-      <!-- /.card -->
-
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+		</section>
+		
+	</div>
 
 
 
@@ -372,14 +329,18 @@
 
   <!-- REQUIRED SCRIPTS -->
 
-  <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="dist/js/adminlte.min.js"></script>
-  <!-- AdminLTE for demo purposes -->
-  {{-- <script src="dist/js/demo.js"></script> --}}
+	<!-- jQuery -->
+	<script src="plugins/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 4 -->
+	<script src="js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="dist/js/adminlte.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	{{-- <script src="dist/js/demo.js"></script> --}}
+	<script>
+		$('#flash-overlay-modal').modal();
+		$('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+	</script>
 </body>
 
 </html>

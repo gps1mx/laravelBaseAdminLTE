@@ -9,62 +9,66 @@
   <table class="table table-bordered">
     <tr class="active">
     <td scope="row" colspan="2">
-      <b>Buscador</b>
+      	<b>Buscador</b>
     </td>
-    </tr>
+	</tr>
+	
+	{!! Form::label('buscado', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
     <tr>
-
     <td>
-      <div class="form-group{{ $errors->has('buscado') ? ' has-error' : '' }}">
-      {!! Form::label('buscado', 'Nombre o Número de socio', ['class' => 'col-sm-3 control-label']) !!}
-      <div class="col-sm-9">
-        {!! Form::text('buscado', null, ['class' => 'form-control', 'required' => 'required']) !!}
-        <small class="text-danger">{{ $errors->first('buscado') }}</small>
-      </div>
-      </div>
-    </td>
-
-    <td class="text-center">
-      {!! Form::submit('Buscar', ['class' => 'btn btn-info', 'name' => 'submitbutton'])!!}
-    </td>
-
+		<div class="form-group{{ $errors->has('buscado') ? ' has-error' : '' }}">
+			{!! Form::text('buscado', null, ['class' => 'form-control', 'required' => 'required']) !!}
+			<small class="text-danger">{{ $errors->first('buscado') }}</small>
+		</div>
+	</td>
     </tr>
+	<tr>
+    <td class="text-center">
+      	{!! Form::submit('Buscar', ['class' => 'btn btn-info text-dark', 'name' => 'submitbutton'])!!}
+    </td>
+
+	</tr>
+	
   </table>
   {!! Form::close() !!}
 </div>
+<br>
 
 
-  <div class="table-responsive bs-example widget-shadow">
+<div class="box-body">
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Número de socio</th>
           <th>Nombre</th>
-          <th>Tipo</th>
-          {{-- <th>Campus</th> --}}
-          <th colspan='3' class="text-center">Acciones</th>
-          <!-- <th>Cambiar<br>contraseña</th>
-          <th>Eliminar</th> -->
+          <th>Detalles</th>
         </tr>
       </thead>
       <tbody>
         @foreach($users as $user)
           <tr class="active">
-            <td scope="row">{{ $user->socio_clave }}</td>
-            <td>{{ $user->nombre }} {{ $user->apellido_paterno }} {{ $user->apellido_materno }}</td>
-            <td>{{ $user->role }}</td>
-            {{-- <td>{{ $user->campus }}</td> --}}
+            <td>{{ $user->fullname }}</td>
             <td class="text-center">
-              <a href="{{ route('users.edit', $user->id ) }}" class="btn btn-warning" >Editar</a>&nbsp;
-              @if ( (Auth::user()->role=='root') || (Auth::user()->role=='directivo') || (Auth::user()->role=='administrativo') || (Auth::user()->role=='operativo') )
-                <a href="{{ route('users.pwd', $user->id ) }}" class="btn btn-info" >Cambiar pwd</a>&nbsp;
-                <a href="{{ route('users.destroy', $user->id ) }}" class="btn btn-danger" onclick="return confirm('Estás seguro que deseas desactivar este usuario?')" >Desactivar</a>
-              @endif
+				<a href="{{ route('users.show', $user->id ) }}" class="btn btn-success text-dark" >Detalles</a>&nbsp;&nbsp;
+				<a href="{{ route('users.edit', $user->id ) }}" class="btn btn-warning text-dark" >Editar</a>&nbsp;&nbsp;
+				<a href="{{ route('users.pwd', $user->id ) }}" class="btn btn-info text-dark" >Cambiar Pwd</a>
+				@if($user->active==1)
+				<a href="{{ route('users.unactive', $user->id ) }}" class="btn btn-danger text-dark" >Desactivar usuario</a>
+				@else
+				<a href="{{ route('users.active', $user->id ) }}" class="btn btn-dark text-light" >Reactivar usuario</a>
+				@endif 
             </td>
           </tr>
         @endforeach
       </tbody>
-    </table>
+	</table>
+	<table class="table">
+		<tr>
+			<td class="text-center">
+				<a href="{{ route('users.create') }}" class="btn btn-success text-dark" >Nuevo usuario</a>
+			</td>
+		</tr>
+	</table>
+
     {!! $users->render(); !!}
   </div>
 

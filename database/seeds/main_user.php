@@ -12,7 +12,7 @@ class main_user extends Seeder
     public function run()
     {
         \DB::table('users')->insert(array(
-            'name' => 'Root',
+            'name' => 'root',
             'email' => 'root@root.com',
             'password' => bcrypt('12345678'),
             'remember_token' => bcrypt('12345678'),

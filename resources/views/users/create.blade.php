@@ -16,68 +16,58 @@
 
 	{!! Form::open(['route' => 'users.store', 'method' => 'POST', 'class' => 'orm-horizontal']) !!}
 
-	<div class="form-group">
-		{!! Form::label('nombre', 'Nombre *', ['class' => 'col-md-3 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-user"></i>
-									</span>
-			{!! Form::text('nombre', null, ['class' => 'form-control1', 'required']) !!}
-		</div>
-	</div>
 
-	<div class="form-group">
-		{!! Form::label('apellido_paterno', 'Apellido paterno *', ['class' => 'col-md-3 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-user"></i>
-									</span>
-			{!! Form::text('apellido_paterno', null, ['class' => 'form-control1', 'required']) !!}
-		</div>
-	</div>
+	<div class="box-body">
+        <table class="table table-bordered">
+            <tr>
+                <td class="text-right" width="50%">
+                    Nombre completo *
+                </td>
+                <td class="text-left" width="50%">
+					{!! Form::text('fullname', null, ['class' => 'form-control', 'required']) !!}
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right" width="50%">
+                    Email *
+                </td>
+                <td class="text-left" width="50%">
+					{!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'eg: foo@bar.com']) !!}
+                </td>
+			</tr>
+			<tr>
+                <td class="text-right" width="50%">
+                    Contraseña
+                </td>
+                <td class="text-left" width="50%">
+					<input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                </td>
+            </tr>
+			<tr>
+                <td class="text-right" width="50%">
+                    Repetir contraseña
+                </td>
+                <td class="text-left" width="50%">
+					<input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">    
+				</td>
+            </tr>
+        </table>
+    </div>
 
-	<div class="form-group">
-		{!! Form::label('apellido_materno', 'Apellido materno', ['class' => 'col-md-3 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-user"></i>
-									</span>
-			{!! Form::text('apellido_materno', null, ['class' => 'form-control1']) !!}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('socio_clave', 'Clave de socio *', ['class' => 'col-md-3 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-check"></i>
-									</span>
-			{!! Form::text('socio_clave', null, ['class' => 'form-control1', 'placeholder' => 'Clave de socio', 'required']) !!}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('password', 'Contraseña *', ['class' => 'col-md-3 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-key"></i>
-									</span>
-			{!! Form::password('password', ['class' => 'form-control1', 'placeholder' => 'MiContraseñaSecreta', 'required']) !!}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('role', 'Role *', ['class' => 'col-md-3 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-arrows-v"></i>
-									</span>
-			{!! Form::select('role', ['directivo' => 'Directivo', 'administrativo' => 'Administrativo', 'operativo' => 'Operativo', 'socio' => 'Socio', 'invitado' => 'Invitado'], 'socio', ['placeholder' => '', 'class' => 'form-control1', 'required']) !!}
-		</div>
-	</div>
-
-	{!! Form::button('Guardar', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
-	<a href="users.index" >{!! Form::button('Cancelar', ['class' => 'btn btn-warning', 'onclick' => 'return confirm("Estás seguro que deseas cancelar la operación?")']) !!}</a>
+    <table class="table table-bordered">
+        <tr>
+            <td class="text-center">
+                {{-- {!! Form::submit('Guardar', ['class' => 'btn btn-success text-dark', 'onclick' => 'return confirm("Estás seguro que deseas actualizar?")']) !!}
+				<a href="users.index" >
+					{!! Form::button('Cancelar', ['class' => 'btn btn-warning text-dark', 'onclick' => 'return confirm("Estás seguro que deseas cancelar la operación?")']) !!}
+				</a>     --}}
+				
+				{!! Form::button('Guardar', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+				<a href="users.index" >{!! Form::button('Cancelar', ['class' => 'btn btn-warning', 'onclick' => 'return confirm("Estás seguro que deseas cancelar la operación?")']) !!}</a>
+			
+            </td>
+        </tr>
+	</table>
 
 	{!! Form::close() !!}
 

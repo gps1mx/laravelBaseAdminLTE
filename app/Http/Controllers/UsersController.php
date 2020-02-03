@@ -24,30 +24,30 @@ class UsersController extends Controller
     public function create()
     {
         return view('users.create')
-        ->with('seccion', 'administracion')
-        ->with('subseccion', 'users')
+            ->with('seccion', 'administracion')
+            ->with('subseccion', 'users')
             ;
     }
 
     public function search(Request $request)
     {      
         $buscado = preg_replace('/\s{2,}/', ' ', $request->buscado);
-        $this->nombre_compuesto();
+        // $this->nombre_compuesto();
         $permutar = $this->permutar($buscado);
-        $users = User::orderBy('apellido_paterno', 'ASC')
-            ->where('socio_clave', "$buscado")
-            ->orWhere('nombre_compuesto', 'like', "%$buscado%")
+        $users = User::orderBy('fullname', 'ASC')
+            ->where('fullname', 'like', "%$buscado%")
             ->orWhere(function ($query) use ($permutar) {
                 foreach($permutar as $permuta) {
-                    $query->orWhere('nombre_compuesto', 'like', "$permuta");
+                    $query->orWhere('fullname', 'like', "$permuta");
                 }
             })
             ->paginate(10000);
 
         return view('users.search')
-        ->with('seccion', 'administracion')
-        ->with('subseccion', 'users')
+            ->with('seccion', 'administracion')
+            ->with('subseccion', 'users')
             ->with('users', $users)
+            ->with('buscado', $buscado)
         ;
     }
 
@@ -55,21 +55,28 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'apellido_paterno' => 'required|string|min:3|max:191',
-            'nombre' => 'required|string|min:3|max:191',
-            'role' => 'required|string|max:255',
-            'password' => 'required|string|min:6|max:255',
-            'socio_clave' => 'required|string|min:1|max:255',
+            'fullname' => 'required|string|min:3|max:191',
+            'password' => 'required|confirmed|min:8',
         ]);
         $user = New User($request->all() );
-        $user->name = $request->apellido_paterno . " " . $request->apellido_materno . " " . $request->nombre ;
+        $user->name = $request->email ;
+        $user->email = $request->email ;
+        $user->fullname = $request->fullname;
         $user->password=bcrypt($request->password);
-        $user->socio_clave = $request->socio_clave;
         $user->save();
-        Flash::success("Usuario creado exitosamente");
-        $this->nombre_compuesto();
+        flash("Usuario creado exitosamente")->success();
+        // $this->nombre_compuesto();
         return redirect()->route('users.index');
 
+    }
+
+    public function show($id) {
+        $user = User::find($id);
+        return view('users.show')
+            ->with('user', $user)
+            ->with('seccion', 'administracion')
+            ->with('subseccion', 'users')    
+            ;
     }
 
     public function edit($id) {
@@ -83,27 +90,31 @@ class UsersController extends Controller
 
     public function update(Request $request, $id) {
         $this->validate($request, [
-            'apellido_paterno' => 'required|string|min:3|max:191',
-            'nombre' => 'required|string|min:3|max:191',
-            'role' => 'required|string|max:255',
+            'fullname' => 'required|string|min:3|max:191',
         ]);
         $user = User::find($id);
-        $user->name = $request->apellido_paterno . " " . $request->apellido_materno . " " . $request->nombre ;
-        $user->nombre =$request->nombre ;
-        $user->apellido_paterno =$request->apellido_paterno ;
-        $user->apellido_materno =$request->apellido_materno ;
-        $user->role = $request->role;
+        $user->fullname =$request->fullname ;
         $user->save();
-        Flash::success("El usuario ".$user->name." (ID: ".$user->id.") ha sido actualizado correctamente");
-        $this->nombre_compuesto();
+        flash("El usuario ".$user->name." (ID: ".$user->id.") ha sido actualizado correctamente")->success();
+        // $this->nombre_compuesto();
+        return redirect()->route('users.show', $user->id);
+    }
+
+    public function unactive($id)
+    {
+        $user = User::find($id);
+        $user->active='0';
+        $user->save();
+        flash("El usuario ".$user->name." (ID: ".$user->id.") ha sido desactivado!")->warning();
         return redirect()->route('users.index');
     }
 
-    public function destroy($id)
+    public function active($id)
     {
         $user = User::find($id);
-        $user->activo='No';
-        Flash::error("El usuario ".$user->name." (ID: ".$user->id.") ha sido desactivado!")->important();
+        $user->active='1';
+        $user->save();
+        flash("El usuario ".$user->name." (ID: ".$user->id.") ha sido reactivado!")->success();
         return redirect()->route('users.index');
     }
 
@@ -117,12 +128,15 @@ class UsersController extends Controller
 
     public function pwdsave(Request $request, $id)
     {
+        $this->validate($request, [
+            'password' => 'required|confirmed|min:8',
+        ]);
         $user = User::find($id);
         $user->password=bcrypt($request->password);
-        $user->cambiapwd='1';
         $user->save();
-        Flash::success("Contraseña del usuario ".$user->name." actualizada exitosamente");
-        return redirect()->route('dashboard');
+        flash("Contraseña del usuario ".$user->name." actualizada exitosamente")->success();
+        return redirect()->route('users.show', $user->id);
+
     }
 
     function nombre_compuesto()
@@ -146,7 +160,6 @@ class UsersController extends Controller
         $temporal=$input;
         //borro el primer numero del array
         array_shift($input);
-        // dd($miarray);
         //ahora la cuenta esta en que solo quedan 3
         for($u=0;$u<count($temporal);$u++){
             for($i=0;$i<count($input);$i++){

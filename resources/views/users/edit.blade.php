@@ -16,49 +16,30 @@
 
 	{!! Form::open(['route' => ['users.update', $user ], 'method' => 'PUT']) !!}
 
-	<div class="form-group">
-		{!! Form::label('nombre', 'Nombre *', ['class' => 'col-md-2 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-user"></i>
-									</span>
-			{!! Form::text('nombre', $user->nombre, ['class' => 'form-control1', 'required']) !!}
-		</div>
-	</div>
 
-	<div class="form-group">
-		{!! Form::label('apellido_paterno', 'Apellido paterno *', ['class' => 'col-md-2 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-user"></i>
-									</span>
-			{!! Form::text('apellido_paterno', $user->apellido_paterno, ['class' => 'form-control1', 'required']) !!}
-		</div>
-	</div>
+	<div class="box-body">
+        <table class="table table-bordered">
+            <tr>
+                <td class="text-right" width="50%">
+                    Nombre completo *
+                </td>
+                <td class="text-left" width="50%">
+					{!! Form::text('fullname', $user->fullname, ['class' => 'form-control', 'required']) !!}
+                </td>
+            </tr>
+        </table>
+    </div>
 
-	<div class="form-group">
-		{!! Form::label('apellido_materno', 'Apellido materno', ['class' => 'col-md-2 control-label']) !!}
-		<div class="input-group">
-									<span class="input-group-addon">
-										<i class="fa fa-user"></i>
-									</span>
-			{!! Form::text('apellido_materno', $user->apellido_materno, ['class' => 'form-control1']) !!}
-		</div>
-	</div>
-
-	<div class="form-group">
-		{!! Form::label('role', 'Role *', ['class' => 'col-md-2 control-label']) !!}
-		<div class="input-group">
-			<span class="input-group-addon">
-				<i class="fa fa-arrows-v"></i>
-			</span>
-			{!! Form::select('role', ['directivo' => 'Directivo',  'administrativo' => 'Administrativo', 'operativo' => 'Operativo', 'socio'=> 'Socio', 'invitado' => 'Invitado'], $user->role, [ 'class' => 'form-control1']) !!}
-		</div>
-	</div>
-	<div>&nbsp</div>
-
-	{!! Form::submit('Guardar', ['class' => 'btn btn-success', 'onclick' => 'return confirm("Estás seguro que deseas actualizar?")']) !!}
-	<a href="users.index" >{!! Form::button('Cancelar', ['class' => 'btn btn-warning', 'onclick' => 'return confirm("Estás seguro que deseas cancelar la operación?")']) !!}</a>
+    <table class="table table-bordered">
+        <tr>
+            <td class="text-center">
+                {!! Form::submit('Guardar', ['class' => 'btn btn-success text-dark', 'onclick' => 'return confirm("Estás seguro que deseas actualizar?")']) !!}
+				<a href="users.index" >
+					{!! Form::button('Cancelar', ['class' => 'btn btn-warning text-dark', 'onclick' => 'return confirm("Estás seguro que deseas cancelar la operación?")']) !!}
+				</a>      
+            </td>
+        </tr>
+	</table>
 
 	{!! Form::close() !!}
 
