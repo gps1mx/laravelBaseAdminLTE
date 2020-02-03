@@ -39,12 +39,6 @@ Route::group(['middleware' => 'auth'], function () {
     /**
      * Rutas users
      */
-    // Route::get('users.index', 'UsersController@index')->name('users.index');
-    // Route::get('users.index', function () {
-    //     'UsersController@index';
-    // })->name('users.index');
-    // Route::get('users.index', ['seccion' => 'administracion', 'subseccion' => 'users', 'uses' => 'UsersController@index'])->name('users.index');
-
     Route::get('users.index', 'UsersController@index')->name('users.index');
     Route::get('users.{id}.show', 'UsersController@show')->name('users.show');
     Route::any('users.search', 'UsersController@search')->name('users.search');
@@ -58,6 +52,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('users.{id}.pwd', 'UsersController@pwd')->name('users.pwd');
     Route::post('users.{id}.pwd', 'UsersController@pwd')->name('users.pwd');
     Route::put('users.{id}.pwdsave', 'UsersController@pwdsave')->name('users.pwdsave');
+    
+    /**
+     * Rutas permisos
+     */
+    Route::get('permisos.index', 'PermisosController@index')->name('permisos.index');
+    Route::get('permisos.create', 'PermisosController@create')->name('permisos.create');
+    Route::get('permisos.store', 'PermisosController@store')->name('permisos.store');
+    Route::post('permisos.store', 'PermisosController@store')->name('permisos.store');
+
 
 });
 
