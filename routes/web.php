@@ -36,5 +36,25 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::get('/', 'DashboardController@dashboard')->name('/');
 
+    /**
+     * Rutas users
+     */
+    // Route::get('users.index', 'UsersController@index')->name('users.index');
+    // Route::get('users.index', function () {
+    //     'UsersController@index';
+    // })->name('users.index');
+    Route::get('users.index', ['seccion' => 'administracion', 'subseccion' => 'users', 'uses' => 'UsersController@index'])->name('users.index');
+
+    Route::any('users.search', 'UsersController@search')->name('users.search');
+    Route::get('users.create', 'UsersController@create')->name('users.create');
+    Route::post('users.store', 'UsersController@store')->name('users.store');
+    Route::get('users.{id}.edit', 'UsersController@edit')->name('users.edit');
+    Route::post('users.{id}.edit', 'UsersController@edit')->name('users.edit');
+    Route::put('users.{id}.update', 'UsersController@update')->name('users.update');
+    Route::get('users.{id}.destroy', 'UsersController@destroy')->name('users.destroy');
+    Route::get('users.{id}.pwd', 'UsersController@pwd')->name('users.pwd');
+    Route::post('users.{id}.pwd', 'UsersController@pwd')->name('users.pwd');
+    Route::put('users.{id}.pwdsave', 'UsersController@pwdsave')->name('users.pwdsave');
+
 });
 

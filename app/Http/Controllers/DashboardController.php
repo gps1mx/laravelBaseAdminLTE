@@ -12,6 +12,9 @@ class DashboardController extends Controller
     public function dashboard()  
     {
         
-        return view('/dashboard');
+        return view('/dashboard')
+        ->with('seccion', 'dashboard')
+        ->with('subseccion', '')
+        ;
     }
 }

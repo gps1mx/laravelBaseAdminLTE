@@ -7,7 +7,12 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>Dev App</title>
+  @if(!strlen($seccion))
+    $seccion = "dashboard";
+  @endif
 
+  <!-- Bootstrap (4) -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -107,8 +112,69 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             {{-- <li class="nav-item has-treeview menu-open"> --}}
+
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <li class="nav-item">
+                <a href="{{ route('dashboard') }}" class="nav-link 
+                  @if($seccion == 'dashboard')
+                  active 
+                  @endif
+                ">
+                  <i class="fas fa-home nav-icon"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link
+              @if($seccion == 'administracion')
+              active 
+              @endif
+              ">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Administración
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ route('users.index') }}" class="nav-link
+                  @if($subseccion == 'users')
+                  active 
+                  @endif
+                  ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Usuarios</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Link 2</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Link 3</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Link 4</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link
+              @if($seccion == 'pages')
+              active
+              @endif">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Pages
@@ -144,10 +210,13 @@
             </li>
 
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link active">
+              <a href="#" class="nav-link
+              @if($seccion == 'pages2')
+              active
+              @endif">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
-                  Pages
+                  Pages 2
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -159,7 +228,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link active">
+                  <a href="#" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Link 2</p>
                   </a>
@@ -200,27 +269,82 @@
 
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0 text-dark">@yield('title')</h1>
-            </div><!-- /.col -->
-            
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
 
       <!-- Main content -->
-      <div class="content">
-        <div class="container-fluid">
-          @include('flash::message') @yield('content')
-        </div><!-- /.container-fluid -->
+      {{-- <div class="content">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  @include('flash::message') @yield('content')
+                </div>
+              </div>
+            </div>
+          </div>
+      </div> --}}
+	  <!-- /.content -->
+	  
+
+	  
+
+
+
+	  <!-- =============================================== -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          {{-- <div class="col-sm-6">
+            <h1>Blank Page 1</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Blank Page</li>
+            </ol>
+		  </div> --}}
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><h3>@yield('title')</h3></h3>
+
+          <div class="card-tools">
+            {{-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fas fa-times"></i></button> --}}
+          </div>
+        </div>
+        <div class="card-body">
+			@include('flash::message') @yield('content')
+        </div>
+        <!-- /.card-body -->
+        {{-- <div class="card-footer">
+          Footer
+        </div> --}}
+        <!-- /.card-footer-->
       </div>
-      <!-- /.content -->
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+
+
+
     </div>
     <!-- /.content-wrapper -->
 
@@ -241,7 +365,7 @@
       <!-- To the right -->
 
       <!-- Default to the left -->
-      <strong>Copyright &copy; Todos los derechos reservados.
+      <strong>Copyright 2020 &copy; Todos los derechos reservados.
     </footer>
   </div>
   <!-- ./wrapper -->
