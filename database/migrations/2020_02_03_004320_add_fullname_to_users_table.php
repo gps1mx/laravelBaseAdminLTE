@@ -14,7 +14,7 @@ class AddFullnameToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('fullname')->after('name');
+            $table->string('fullname')->after('name')->default('');
         });
     }
 

@@ -6,7 +6,6 @@
 
 Fullname: {{ Auth::user()->fullname }}
 
-dd($permissionNames);
 
 
 @stop
