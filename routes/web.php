@@ -61,6 +61,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('permisos.store', 'PermisosController@store')->name('permisos.store');
     Route::post('permisos.store', 'PermisosController@store')->name('permisos.store');
 
+    /**
+     * Rutas asignación de permisos
+     */
+    Route::get('permisos.index', 'PermisosController@index')->name('permisos.index');
+    Route::get('permisos.create', 'PermisosController@create')->name('permisos.create');
+    Route::get('permisos.store', 'PermisosController@store')->name('permisos.store');
+    Route::post('permisos.store', 'PermisosController@store')->name('permisos.store');
+
 
 });
 

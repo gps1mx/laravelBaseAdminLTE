@@ -15,11 +15,11 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="css/all.min.css">
-	<link rel="stylesheet" href="css/fontawesome.min.css">
+	{{-- <link rel="stylesheet" href="css/fontawesome.css"> --}}
 	<!-- Theme style -->
 	<link rel="stylesheet" href="dist/css/adminlte.min.css">
 	<!-- Google Font: Source Sans Pro -->
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700,800,900" rel="stylesheet">
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse skin-yellow accent-dark">
@@ -121,8 +121,7 @@
 			active 
 			@endif
 			">
-				<i class="nav-icon fa fa-line-chart"></i>
-				<i class="fa fa-line-chart" aria-hidden="true"></i>
+				<i class="nav-icon fas fa-chart-line" aria-hidden="true"></i>
 				<p>
 				Administración
 				<i class="right fas fa-angle-left"></i>
@@ -148,29 +147,40 @@
 				</li>
 
 				<li class="nav-item">
-				<a href="{{ route('permisos.index') }}" class="nav-link
-				@if(($seccion == 'administracion')&&($subseccion == 'permisos'))
-				active 
-				@endif
-				">
-					<i class="far  
+					<a href="{{ route('permisos.index') }}" class="nav-link
 					@if(($seccion == 'administracion')&&($subseccion == 'permisos'))
-					active fa-check-circle 
-					@else
-					fa-circle
+					active 
 					@endif
-					nav-icon"></i>
-					<p>Permisos</p>
-				</a>
+					">
+						<i class="far  
+						@if(($seccion == 'administracion')&&($subseccion == 'permisos'))
+						active fa-check-circle 
+						@else
+						fa-circle
+						@endif
+						nav-icon"></i>
+						<p>Permisos</p>
+					</a>
 				</li>
 
 				<li class="nav-item">
-				<a href="#" class="nav-link">
-					<i class="far fa-circle nav-icon"></i>
-					<p>Link 3</p>
-				</a>
+					<a href="{{ route('permisos.index') }}" class="nav-link
+					@if(($seccion == 'administracion')&&($subseccion == 'permisosAsignacion'))
+					active 
+					@endif
+					">
+						<i class="far  
+						@if(($seccion == 'administracion')&&($subseccion == 'permisosAsignacion'))
+						active fa-check-circle 
+						@else
+						fa-circle
+						@endif
+						nav-icon"></i>
+						<p>Asignación de Permisos</p>
+					</a>
 				</li>
-				<li class="nav-item">
+
+					<li class="nav-item">
 				<a href="#" class="nav-link">
 					<i class="far fa-circle nav-icon"></i>
 					<p>Link 4</p>

@@ -4,6 +4,9 @@
 
 @section('content')
 
+Fullname: {{ Auth::user()->fullname }}
+
+dd($permissionNames);
 
 
 @stop
